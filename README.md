@@ -2,8 +2,11 @@
 
 A sleek, modern web application for previewing and inspecting font files. Upload any font (TTF, OTF, WOFF, WOFF2) and explore it in detail — all in your browser, no server required.
 
+### 👉 [**Try it live — daemonn69.github.io/font-viewer**](https://daemonn69.github.io/font-viewer/)
+
 ![Font Viewer](https://img.shields.io/badge/version-1.0-7C3AED?style=for-the-badge)
 ![License](https://img.shields.io/badge/license-MIT-EC4899?style=for-the-badge)
+![GitHub Pages](https://img.shields.io/badge/demo-live-00C853?style=for-the-badge&logo=github&logoColor=white)
 ![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![JS](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
