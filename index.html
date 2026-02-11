@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Font Viewer — Preview Fonts</title>
+    <meta name="description" content="Upload a font and preview all its characters, styles and display variants">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <div class="logo">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                        <rect width="32" height="32" rx="8" fill="url(#logo-grad)" />
+                        <text x="16" y="22" text-anchor="middle" fill="white" font-size="18" font-weight="700"
+                            font-family="Inter">F</text>
+                        <defs>
+                            <linearGradient id="logo-grad" x1="0" y1="0" x2="32" y2="32">
+                                <stop stop-color="#7C3AED" />
+                                <stop offset="1" stop-color="#EC4899" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <h1 class="header-title">Font Viewer</h1>
+            </div>
+            <div class="header-right">
+                <span class="font-name-display" id="fontNameDisplay" data-i18n="fontNotLoaded">No font loaded</span>
+                <button class="btn-lang" id="langToggle" title="Switch language">
+                    <span class="btn-lang-text" id="langLabel">RU</span>
+                </button>
+                <button class="btn-theme" id="themeToggle" data-i18n-title="toggleTheme" title="Toggle theme">
+                    <svg id="themeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <circle cx="12" cy="12" r="5" />
+                        <line x1="12" y1="1" x2="12" y2="3" />
+                        <line x1="12" y1="21" x2="12" y2="23" />
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                        <line x1="1" y1="12" x2="3" y2="12" />
+                        <line x1="21" y1="12" x2="23" y2="12" />
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Upload Area -->
+        <section class="upload-section" id="uploadSection">
+            <div class="upload-area" id="uploadArea">
+                <div class="upload-icon">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.5">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="17 8 12 3 7 8" />
+                        <line x1="12" y1="3" x2="12" y2="15" />
+                    </svg>
+                </div>
+                <h2 class="upload-title" data-i18n="uploadTitle">Drag and drop a font file here</h2>
+                <p class="upload-subtitle" data-i18n="uploadSubtitle">or click to select a file</p>
+                <p class="upload-formats" data-i18n="uploadFormats">Supported formats: .ttf, .otf, .woff, .woff2</p>
+                <input type="file" id="fontFileInput" accept=".ttf,.otf,.woff,.woff2" hidden>
+            </div>
+        </section>
+
+        <!-- Preview Section -->
+        <section class="preview-section hidden" id="previewSection">
+            <!-- Toolbar -->
+            <div class="toolbar">
+                <div class="toolbar-group">
+                    <label class="toolbar-label" data-i18n="toolbarSize">Size</label>
+                    <input type="range" id="fontSizeSlider" min="8" max="200" value="48" class="slider">
+                    <span class="toolbar-value" id="fontSizeValue">48px</span>
+                </div>
+                <div class="toolbar-group">
+                    <label class="toolbar-label" data-i18n="toolbarLetterSpacing">Letter spacing</label>
+                    <input type="range" id="letterSpacingSlider" min="-10" max="30" value="0" class="slider">
+                    <span class="toolbar-value" id="letterSpacingValue">0px</span>
+                </div>
+                <div class="toolbar-group">
+                    <label class="toolbar-label" data-i18n="toolbarLineHeight">Line height</label>
+                    <input type="range" id="lineHeightSlider" min="80" max="300" value="140" class="slider">
+                    <span class="toolbar-value" id="lineHeightValue">140%</span>
+                </div>
+                <div class="toolbar-group toolbar-colors">
+                    <label class="toolbar-label" data-i18n="toolbarTextColor">Text color</label>
+                    <input type="color" id="textColorPicker" value="#ffffff" class="color-picker">
+                </div>
+                <div class="toolbar-group toolbar-colors">
+                    <label class="toolbar-label" data-i18n="toolbarBg">Background</label>
+                    <input type="color" id="bgColorPicker" value="#0f0f23" class="color-picker">
+                </div>
+                <div class="toolbar-group">
+                    <button class="btn-upload-new" id="uploadNewBtn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="17 8 12 3 7 8" />
+                            <line x1="12" y1="3" x2="12" y2="15" />
+                        </svg>
+                        <span data-i18n="uploadAnother">Upload another</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab active" data-tab="preview" data-i18n="tabPreview">Preview</button>
+                <button class="tab" data-tab="paragraph" data-i18n="tabParagraph">Paragraph</button>
+                <button class="tab" data-tab="waterfall" data-i18n="tabWaterfall">Waterfall</button>
+                <button class="tab" data-tab="glyphs" data-i18n="tabGlyphs">Glyphs</button>
+                <button class="tab" data-tab="info" data-i18n="tabInfo">Info</button>
+            </div>
+
+            <!-- Tab Content: Preview -->
+            <div class="tab-content active" id="tab-preview">
+                <div class="preview-card" id="previewCard">
+                    <div class="preview-text-wrapper">
+                        <div class="preview-text" id="previewText" contenteditable="true" spellcheck="false">
+                            The quick brown fox jumps over the lazy dog.
+                            0123456789 !@#$%^&*()
+                        </div>
+                    </div>
+                </div>
+                <p class="hint" data-i18n="hintEdit">Click on text to edit</p>
+            </div>
+
+            <!-- Tab Content: Paragraph -->
+            <div class="tab-content" id="tab-paragraph">
+                <div class="preview-card" id="paragraphCard">
+                    <div class="paragraph-text" id="paragraphText">
+                        <p data-i18n="paragraphSample1">Typography is the art of arranging type to make written language
+                            legible, readable and appealing when displayed. A good font should be not only beautiful,
+                            but also comfortable to read.</p>
+                        <p data-i18n="paragraphSample2">The arrangement of type involves selecting typefaces, point
+                            sizes, line lengths, line-spacing, and letter-spacing. It also involves adjusting the
+                            display of text to create visual harmony.</p>
+                        <p>ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
+                        <p>abcdefghijklmnopqrstuvwxyz</p>
+                        <p data-i18n="paragraphCyrillicUpper">АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ</p>
+                        <p data-i18n="paragraphCyrillicLower">абвгдеёжзийклмнопрстуфхцчшщъыьэюя</p>
+                        <p>0123456789 .,;:!? «»""''‹›—–-…·•/\|@#$%^&*()</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: Waterfall -->
+            <div class="tab-content" id="tab-waterfall">
+                <div class="preview-card" id="waterfallCard">
+                    <div class="waterfall-text" id="waterfallText"></div>
+                </div>
+            </div>
+
+            <!-- Tab Content: Glyphs -->
+            <div class="tab-content" id="tab-glyphs">
+                <div class="glyphs-controls">
+                    <div class="glyph-search-wrapper">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="11" cy="11" r="8" />
+                            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                        </svg>
+                        <input type="text" id="glyphSearch" data-i18n-placeholder="glyphSearchPlaceholder"
+                            placeholder="Search glyph..." class="glyph-search">
+                    </div>
+                    <select id="glyphCategory" class="glyph-category-select">
+                        <option value="all" data-i18n="catAll">All glyphs</option>
+                        <option value="latin" data-i18n="catLatin">Latin</option>
+                        <option value="cyrillic" data-i18n="catCyrillic">Cyrillic</option>
+                        <option value="numbers" data-i18n="catNumbers">Numbers</option>
+                        <option value="punctuation" data-i18n="catPunctuation">Punctuation</option>
+                        <option value="symbols" data-i18n="catSymbols">Symbols</option>
+                    </select>
+                </div>
+                <div class="glyphs-grid" id="glyphsGrid"></div>
+                <div class="glyph-detail hidden" id="glyphDetail">
+                    <div class="glyph-detail-char" id="glyphDetailChar"></div>
+                    <div class="glyph-detail-info">
+                        <div class="glyph-info-row">
+                            <span class="glyph-info-label" data-i18n="glyphChar">Character:</span>
+                            <span class="glyph-info-value" id="glyphInfoChar"></span>
+                        </div>
+                        <div class="glyph-info-row">
+                            <span class="glyph-info-label">Unicode:</span>
+                            <span class="glyph-info-value" id="glyphInfoUnicode"></span>
+                        </div>
+                        <div class="glyph-info-row">
+                            <span class="glyph-info-label">HTML:</span>
+                            <span class="glyph-info-value" id="glyphInfoHtml"></span>
+                        </div>
+                    </div>
+                    <button class="glyph-detail-close" id="glyphDetailClose">✕</button>
+                </div>
+            </div>
+
+            <!-- Tab Content: Info -->
+            <div class="tab-content" id="tab-info">
+                <div class="info-grid" id="infoGrid">
+                    <div class="info-card">
+                        <div class="info-card-label" data-i18n="loading">Loading...</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
