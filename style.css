@@ -21,11 +21,11 @@
 }
 
 [data-theme="light"] {
-    --bg-primary: #ffffff;
-    --bg-secondary: #ffffff;
-    --bg-card: rgba(255, 255, 255, 1);
-    --bg-card-hover: rgba(255, 255, 255, 1);
-    --bg-toolbar: rgba(255, 255, 255, 1);
+    --bg-primary: #f5f3ff;
+    --bg-secondary: #ede9fe;
+    --bg-card: rgba(255, 255, 255, 0.85);
+    --bg-card-hover: rgba(255, 255, 255, 0.95);
+    --bg-toolbar: rgba(255, 255, 255, 0.9);
     --text-primary: #1a1a2e;
     --text-secondary: #6b7280;
     --text-muted: #9ca3af;
@@ -71,9 +71,7 @@ body::before {
     z-index: 0;
 }
 
-[data-theme="light"] body::before {
-    background: none;
-}
+
 
 .app {
     position: relative;
@@ -501,6 +499,10 @@ body::before {
 
 .preview-card:hover {
     border-color: var(--border-hover);
+}
+
+[data-theme="light"] .preview-card {
+    background: #ffffff;
 }
 
 .preview-text-wrapper {
