@@ -502,7 +502,8 @@ body::before {
 }
 
 [data-theme="light"] .preview-card {
-    background: #ffffff;
+    background: #ffffff !important;
+    backdrop-filter: none;
 }
 
 .preview-text-wrapper {
